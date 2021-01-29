@@ -4,23 +4,31 @@ import { useState, useEffect } from "preact/hooks";
 const App = () => {
   const [charCount, setCharCount] = useState(0);
   const [lineCount, setLineCount] = useState(0);
-  const container = document.querySelector(".container");
-  const config = { childList: true, attributes: false };
-  const callback = (mutations) => {
-    for (const mutation of mutations) {
-      console.log(mutation);
-    }
-  };
-  const observer = new MutationObserver(callback);
-  const runObserver = () => {
-    observer.observe(container, config);
-  };
 
-  useEffect(() => runObserver, []);
+  useEffect(() => {
+    const container = document.querySelector(".container");
+    const config = { childList: true, attributes: false };
+    const callback = (mutations) => {
+      for (const mutation of mutations) {
+        let text = mutation.target.innerText;
+        console.log(text);
+        setLineCount((count) => count + 1);
+        console.log(lineCount);
+        setCharCount((count) => count + text.length);
+        text = "";
+        console.log(text);
+      }
+    };
+    const observer = new MutationObserver(callback);
+    observer.observe(container, config);
+  }, []);
 
   const removeLine = () => {
     console.log(lineCount);
-    document.querySelectorAll(".container p")[ptags - 1].remove();
+    document
+      .querySelectorAll(".container p")
+      [lineCount ? lineCount - 1 : lineCount].remove();
+    setLineCount((count) => count - 2);
   };
   return (
     <div className="app">
