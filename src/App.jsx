@@ -10,7 +10,9 @@ const App = () => {
     const config = { childList: true, attributes: false };
     const callback = (mutations) => {
       for (const mutation of mutations) {
-        let text = mutation.target.innerText;
+        let text =
+          mutation.addedNodes[lineCount ? lineCount - 1 : lineCount].innerText;
+        console.log(mutation);
         console.log(text);
         setLineCount((count) => count + 1);
         console.log(lineCount);
@@ -25,10 +27,12 @@ const App = () => {
 
   const removeLine = () => {
     console.log(lineCount);
-    document
-      .querySelectorAll(".container p")
-      [lineCount ? lineCount - 1 : lineCount].remove();
-    setLineCount((count) => count - 2);
+    let lastP = document.querySelectorAll(".container p")[
+      lineCount ? lineCount - 1 : lineCount
+    ];
+    lastP.remove();
+    setCharCount((count) => count - lastP.innerText.length);
+    setLineCount((count) => count - 1);
   };
   return (
     <div className="app">
