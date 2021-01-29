@@ -1,0 +1,14 @@
+{
+  "name": "betttexthooker1.0",
+  "short_name": "Texthooker",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "https://cdn.discordapp.com/attachments/622944361579020329/804153336223629362/783751130139459594.png",
+      "type": "image/png"
+    }
+  ]
+}
+
