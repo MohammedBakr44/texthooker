@@ -16,7 +16,6 @@ const App = () => {
       const config = { childList: true, attributes: false };
       console.log("useEffect initiated!!!");
       loadLines(container);
-      scroll();
       const callback = (mutations) => {
         for (const mutation of mutations) {
           let _lines = lineCount;
@@ -35,6 +34,7 @@ const App = () => {
           console.log(lineCount);
           setCharCount((count) => count + text.length);
           console.log(text);
+          scroll();
         }
       };
       const observer = new MutationObserver(callback);
