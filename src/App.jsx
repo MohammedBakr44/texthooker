@@ -80,6 +80,24 @@ const App = () => {
       localStorage.setItem("lines", []);
       setData([]);
     };
+
+    const scroll = () => {
+      // Copied that from another code, it does the job so no need to change it.
+
+      const LEEWAY = 200; // Amount of "leeway" pixels before latching onto the bottom.
+
+      // Some obscene browser shit because making sense is for dweebs
+      let b = document.body;
+      let offset = b.scrollHeight - b.offsetHeight;
+      let scrollPos = b.scrollTop + offset;
+      let scrollBottom = b.scrollHeight - (b.clientHeight + offset);
+
+      // iF WE ARE AT The bottom, go to the bottom again.
+      if (scrollPos >= scrollBottom - LEEWAY) {
+        window.scrollTo(0, document.body.scrollHeight);
+      }
+    };
+
     return (
       <div className="app">
         <div className="remove">
