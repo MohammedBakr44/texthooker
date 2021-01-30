@@ -16,6 +16,7 @@ const App = () => {
       const config = { childList: true, attributes: false };
       console.log("useEffect initiated!!!");
       loadLines(container);
+      scroll();
       const callback = (mutations) => {
         for (const mutation of mutations) {
           let _lines = lineCount;
