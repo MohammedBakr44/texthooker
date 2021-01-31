@@ -107,7 +107,7 @@ const App = () => {
       <div className="app">
         <div className="remove">
           <span className="chars" onClick={removeLine}>
-            {charCount} / {lineCount}
+            {charCount.toLocaleString()} / {lineCount.toLocalString()}
           </span>
           <span className="button">x</span>
         </div>
