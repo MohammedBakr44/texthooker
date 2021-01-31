@@ -10,7 +10,6 @@ const App = () => {
     const [open, toggle] = useState(false);
     localStorage.text = JSON.stringify({ lines: [] });
     let lines = JSON.parse(localStorage.text).lines;
-    let linesData;
     useEffect(() => {
       const container = document.querySelector(".container");
       const config = { childList: true, attributes: false };
@@ -58,19 +57,24 @@ const App = () => {
       arr.pop();
       return arr;
     };
-
+    // workaround if the localStorage is empty
     const loadLines = (container) => {
-      linesData = localStorage.getItem("lines").split(",");
-      setData(linesData);
-      console.log(linesData);
-      for (const i of linesData) {
-        const line = document.createElement("p");
-        let t = document.createTextNode(`${i}`);
-        setLineCount((line) => line + 1);
-        setCharCount((chars) => chars + i.length);
-        console.log(i);
-        line.appendChild(t);
-        container.appendChild(line);
+      let linesData = localStorage.getItem("lines");
+      if (linesData != null) {
+        linesData = localStorage.getItem("lines").split(",");
+        setData(linesData);
+        console.log(linesData);
+        for (const i of linesData) {
+          const line = document.createElement("p");
+          let t = document.createTextNode(`${i}`);
+          setLineCount((line) => line + 1);
+          setCharCount((chars) => chars + i.length);
+          console.log(i);
+          line.appendChild(t);
+          container.appendChild(line);
+        }
+      } else {
+        return;
       }
     };
 
